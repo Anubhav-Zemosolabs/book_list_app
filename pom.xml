@@ -73,6 +73,11 @@
 			<artifactId>jacoco-maven-plugin</artifactId>
 			<version>0.8.7</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 	</dependencies>
 
@@ -103,10 +108,10 @@
 <!--					</execution>-->
 <!--				</executions>-->
 <!--			</plugin>-->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--			</plugin>-->
 
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>

@@ -1,14 +1,23 @@
 package com.bookportal.app.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="sl_no")
-    private Long slNo;
+    @Column(name="book_id")
+    private int bookId;
 
     @Column(name="name")
     private String name;
@@ -16,36 +25,13 @@ public class Book {
     @Column(name="author")
     private String author;
 
-    public Book() {
-    }
+    @Column(name="price")
+    private double price;
 
-    public Book(Long slNo, String name, String author) {
-        this.slNo = slNo;
-        this.name = name;
-        this.author = author;
-    }
+    @Column(name="description")
+    private String description;
 
-    public Long getSlNo() {
-        return slNo;
-    }
+    @Column(name="rating")
+    private double rating;
 
-    public void setSlNo(Long slNo) {
-        this.slNo = slNo;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 }

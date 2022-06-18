@@ -4,57 +4,58 @@ import com.bookportal.app.entity.Book;
 import com.bookportal.app.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.lang.Integer;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/books")
 public class BookRestController {
-    @Autowired
+
     private BookService bookService;
 
-
-//    public BookRestController(BookService bookService) {
-//        this.bookService = bookService;
-//    }
+    @Autowired
+    public BookRestController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     //    expose "/book" and return list of books
-    @GetMapping("/list")
+    @GetMapping("/")
     public List<Book> findAll(){
         return bookService.findAll();
     }
 
-//    add mapping for get /list/{bookid}
-    @GetMapping("/list/{bookId}")
-    public Book getBook(@PathVariable Long bookId){
-        Book theBook=bookService.findById(bookId);
-        if(theBook==null){
+//    add mapping for get /book/{bookid}
+    @GetMapping("/{bookId}")
+    public Book getBookById(@PathVariable Integer bookId){
+        Book theBook = bookService.findById(bookId);
+        if(theBook == null){
             throw new RuntimeException("Book id not found -"+bookId);
         }
         return theBook;
     }
 
 //    add mapping for POST /list - add new bookItem
-    @PostMapping("/list")
+    @PostMapping("/")
     public Book addBook(@RequestBody Book theBook){
-        theBook.setSlNo(0L);
+        theBook.setBookId(0);
         bookService.save(theBook);
         return theBook;
     }
 
 //    add mapping for PUT/list - update an existing Book
-    @PutMapping("/list")
+    @PutMapping("/")
     public Book updateTodo(@RequestBody Book theBook){
         bookService.save(theBook);
         return theBook;
     }
 
 //    add mapping for DELETE /list/{bookId} -delete bookItem
-    @DeleteMapping("/list/{bookId}")
-    public String deleteBook(@PathVariable Long bookId){
-        Book thebook=bookService.findById(bookId);
+    @DeleteMapping("/{bookId}")
+    public String deleteBook(@PathVariable Integer bookId){
+        Book theBook=bookService.findById(bookId);
 //        throw exception if null
-        if(thebook==null){
+        if(theBook==null){
             throw new RuntimeException("Book Id not found - "+bookId);
         }
         bookService.deleteById(bookId);

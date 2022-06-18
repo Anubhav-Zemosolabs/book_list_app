@@ -1,8 +1,9 @@
 package com.bookportal.app.service;
 
-import com.bookportal.app.dao.BookRepository;
+import com.bookportal.app.repository.BookRepository;
 import com.bookportal.app.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,12 +12,12 @@ import java.util.Optional;
 @Component
 public class BookServiceImpl implements BookService{
 
-    @Autowired
-    private BookRepository bookRepository;
 
-//    public BookServiceImpl(BookRepository bookRepository) {
-//        this.bookRepository = bookRepository;
-//    }
+    private BookRepository bookRepository;
+    @Autowired
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Override
     public List<Book> findAll() {
@@ -24,7 +25,7 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book findById(Long theId) {
+    public Book findById(Integer theId) {
         Optional<Book> result= bookRepository.findById(theId);
         Book theBook=null;
         if(result.isPresent()) theBook=result.get();
@@ -41,7 +42,7 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public void deleteById(Long theId) {
+    public void deleteById(Integer theId) {
         bookRepository.deleteById(theId);
     }
 }
