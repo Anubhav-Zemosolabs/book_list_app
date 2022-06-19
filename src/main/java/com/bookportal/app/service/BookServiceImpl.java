@@ -3,7 +3,6 @@ package com.bookportal.app.service;
 import com.bookportal.app.repository.BookRepository;
 import com.bookportal.app.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,18 +26,18 @@ public class BookServiceImpl implements BookService{
     @Override
     public Book findById(Integer theId) {
         Optional<Book> result= bookRepository.findById(theId);
-        Book theBook=null;
-        if(result.isPresent()) theBook=result.get();
+        Book book = null;
+        if(result.isPresent()) book = result.get();
         else {
-//            we didn't find the employee
-            throw new RuntimeException("Did not found book id : "+theId);
+            // when we didn't find the employee
+            throw new RuntimeException("Did not found book id : " + theId);
         }
-        return theBook;
+        return book;
     }
 
     @Override
-    public void save(Book theBook) {
-        bookRepository.save(theBook);
+    public void save(Book book) {
+        bookRepository.save(book);
     }
 
     @Override
