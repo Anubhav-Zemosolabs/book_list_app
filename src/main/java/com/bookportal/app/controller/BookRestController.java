@@ -4,7 +4,6 @@ import com.bookportal.app.entity.Book;
 import com.bookportal.app.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.lang.Integer;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class BookRestController {
         return bookService.findAll();
     }
 
-//    add mapping for get /book/{bookid}
+    // Get book by id
     @GetMapping("/{bookId}")
     public Book getBookById(@PathVariable Integer bookId){
         Book theBook = bookService.findById(bookId);
@@ -35,7 +34,7 @@ public class BookRestController {
         return theBook;
     }
 
-//    add mapping for POST /list - add new bookItem
+    // Post method to add new book
     @PostMapping("/")
     public Book addBook(@RequestBody Book theBook){
         theBook.setBookId(0);
@@ -43,14 +42,14 @@ public class BookRestController {
         return theBook;
     }
 
-//    add mapping for PUT/list - update an existing Book
+    // Put method to update the present book details
     @PutMapping("/")
     public Book updateTodo(@RequestBody Book theBook){
         bookService.save(theBook);
         return theBook;
     }
 
-//    add mapping for DELETE /list/{bookId} -delete bookItem
+    // Delete mapping for deleting book
     @DeleteMapping("/{bookId}")
     public String deleteBook(@PathVariable Integer bookId){
         Book theBook=bookService.findById(bookId);
@@ -59,7 +58,7 @@ public class BookRestController {
             throw new RuntimeException("Book Id not found - "+bookId);
         }
         bookService.deleteById(bookId);
-        return "Deleted Book with id :- "+bookId;
+        return "Deleted Book with id :- " + bookId;
     }
 
 }

@@ -2,7 +2,6 @@ package com.bookportal.app.service;
 
 
 import com.bookportal.app.entity.Book;
-import java.lang.Integer;
 import java.util.List;
 
 public interface BookService {
